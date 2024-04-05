@@ -10,6 +10,8 @@ PINGDOM_API_TOKEN = os.getenv("PINGDOM_API_TOKEN")
 
 PINGDOM_API_URL = "https://api.pingdom.com/api/3.1"
 
+parent_dir = "reports/"
+
 headers = {
   'Authorization': f'Bearer {PINGDOM_API_TOKEN}',
   'Accept-Encoding': 'gzip'
@@ -179,18 +181,24 @@ def generate_html_report(checks, from_date, to_date, days, report_name, file_nam
             </td>
           </tr>
         </table>
-      </body>
     </html>
+      </body>
     '''
-  with open(file_name, 'w') as f:
+
+  try:
+    os.mkdir(parent_dir)
+  except FileExistsError:
+    pass
+
+  with open(f'{parent_dir}/{file_name}', 'w') as f:
     f.write(html)
 
 def main(days, tags, report_name):
   try:
     from_date = (datetime.datetime.now() - datetime.timedelta(days))
     to_date = datetime.datetime.now()
-    days = f'{days} Day'
-    file_name = f'reports/{days}_day_pingdom_report.html'
+    days = f'{days} day'
+    file_name = f'{days}_pingdom_report.html'
   except TypeError:
     # produce monthly report
     # last day of previous month
@@ -199,7 +207,7 @@ def main(days, tags, report_name):
     # first day for previous month
     from_date = datetime.datetime.combine(datetime.date.today().replace(day=1) - datetime.timedelta(days=to_date.day), datetime.time(0, 0, 0))
     days = to_date.strftime("%B, %Y")
-    file_name = f'reports/{to_date.strftime("%B")}_pingdom_report.html'
+    file_name = f'{to_date.strftime("%B")}_pingdom_report.html'
   finally:
     unix_from_date = from_date.timestamp()
     unix_to_date = to_date.timestamp()

@@ -22,6 +22,7 @@ PINGDOM_API_TOKEN="YOUR_TOKEN_HERE"
 ```
 
 ### Executing program
+Reports are added to a `reports/` directory, which is ignored by git
 
 * Generate a report for the past month, using default tags
 ```
