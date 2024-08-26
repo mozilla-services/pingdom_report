@@ -8,27 +8,33 @@ Configurable report, using tags to select sites, with a configurable date range.
 
 ## Getting Started
 
-### Dependencies
+### Building environment
 
-* pyenv (reommended)
-* pip install -r requirements.txt
+Clone repository and build a virtual environment:
 
-### Installing
+```
+git clone https://github.com/mozilla-it/pingdom_report
+make build
+```
 
-* git clone https://github.com/mozilla-it/pingdom_report 
-* Add your pingdom API token to `.env`:
+Add your pingdom API token to `.env`:
+
 ```
 PINGDOM_API_TOKEN="YOUR_TOKEN_HERE"
 ```
 
 ### Executing program
-Reports are added to a `reports/` directory, which is ignored by git
 
-* Generate a report for the past month, using default tags
+Reports are added to a `reports/` directory, which is ignored by git.
+
+Generate a report for the past month, using default tags:
+
 ```
-python main.py
+./run.sh
 ```
-* Generate a report for the last 35 days, for sites tagged with `bug_bounty_site`
+
+Generate a report for the last 35 days, for sites tagged with `bug_bounty_site`:
+
 ```
-python main.py -d 35 -t bug_bounty_site
+./run.sh -d 35 -t bug_bounty_site
 ```
