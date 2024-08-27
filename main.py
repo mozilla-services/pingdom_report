@@ -5,6 +5,7 @@ import os
 from dotenv import load_dotenv
 import requests
 import pandas as pd
+from premailer import transform
 
 
 load_dotenv()
@@ -205,8 +206,8 @@ def generate_html_report(
               <h3>{checks_y_downtime_text}</h2>
               {df_checks_y_downtime.style
               .format({'UPTIME': "{:.3f}%", "RESPONSE TIME": "{:.0f} ms"})
-              .bar(color="#00ff0050", subset=["RESPONSE TIME"], align="mid")
-              .bar(color="#ff450050", subset=["OUTAGES"], align="mid")
+              .bar(color="#00ff00", subset=["RESPONSE TIME"], align="mid")
+              .bar(color="#ff4500", subset=["OUTAGES"], align="mid")
               .hide()
               .hide(checks_y_downtime_hidden_columns, axis='columns')
               .to_html()}
@@ -217,7 +218,7 @@ def generate_html_report(
               <h3>{checks_n_downtime_text}</h2>
               {df_checks_n_downtime.style
               .format({"UPTIME": "{:.0f}%","RESPONSE TIME": "{:.0f} ms"})
-              .bar(color="#00ff0050", subset=["RESPONSE TIME"], align="mid")
+              .bar(color="#00ff00", subset=["RESPONSE TIME"], align="mid")
               .hide(check_n_downtime_hidden_columns, axis="columns")
               .hide()
               .to_html()}
@@ -239,8 +240,9 @@ def generate_html_report(
     except FileExistsError:
         pass
 
+    fixed_html = transform(html, pretty_print=True)
     with open(f"{PARENT_DIR}/{file_name}", "w") as f:
-        f.write(html)
+        f.write(fixed_html)
 
 
 def main(days, tags, report_name):
