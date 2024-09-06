@@ -8,14 +8,11 @@ Configurable report, using tags to select sites, with a configurable date range.
 
 ## Getting Started
 
-### Building environment
+### Requisites
 
-Clone repository and build a virtual environment:
+* [uv](https://docs.astral.sh/uv/)
 
-```
-git clone https://github.com/mozilla-it/pingdom_report
-make build
-```
+### Token
 
 Add your pingdom API token to `.env`:
 
@@ -30,11 +27,11 @@ Reports are added to a `reports/` directory, which is ignored by git.
 Generate a report for the past month, using default tags:
 
 ```
-./run.sh
+uv run build_report.py
 ```
 
 Generate a report for the last 35 days, for sites tagged with `bug_bounty_site`:
 
 ```
-./run.sh -d 35 -t bug_bounty_site
+uv run build_report.py -d 35 -t bug_bounty_site
 ```
