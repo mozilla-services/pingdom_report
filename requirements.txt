@@ -1,7 +1,0 @@
-python-dotenv
-numpy
-pandas
-requests
-Jinja2
-ruff
-premailer

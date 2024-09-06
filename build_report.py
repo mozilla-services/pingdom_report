@@ -1,3 +1,18 @@
+#!/usr/bin/env python
+# /// script
+# requires-python = ">=3.8"
+# dependencies = [
+#     "python-dotenv",
+#     "numpy",
+#     "pandas",
+#     "requests",
+#     "jinja2",
+#     "premailer",
+# ]
+# ///
+
+# Usage: uv run build_report.py [OPTIONS]
+
 import argparse
 import datetime
 import os
