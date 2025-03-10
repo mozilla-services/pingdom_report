@@ -281,7 +281,7 @@ def main(days, tags, report_name):
             datetime.time(0, 0, 0),
         )
         days = to_date.strftime("%B, %Y")
-        file_name = f'{to_date.strftime("%B")}_pingdom_report.html'
+        file_name = f'{to_date.strftime("%Y_%m")}_pingdom_report.html'
     finally:
         unix_from_date = from_date.timestamp()
         unix_to_date = to_date.timestamp()
